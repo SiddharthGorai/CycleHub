@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "54725184987",
+    "project_id": "cyclehub-38edb",
+    "storage_bucket": "cyclehub-38edb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:54725184987:android:24b7d5841e258fde82abfe",
+        "android_client_info": {
+          "package_name": "com.sid.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "54725184987-16ejgn221oct2qjue93nhu505tdrbqt9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAZ-1JSfeF2f2nTQPVldTfB_NAnJ_dniw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "54725184987-16ejgn221oct2qjue93nhu505tdrbqt9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
