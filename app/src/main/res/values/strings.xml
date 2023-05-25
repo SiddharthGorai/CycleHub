@@ -14,4 +14,11 @@
     <string name="sign_up">Sign Up</string>
     <string name="Heading">Heading</string>
     <string name="description">Description</string>
+    <string name="sign_out">Sign out</string>
+    <string name="change_password">Change Password</string>
+    <string name="name">name</string>
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
+    <string name="url">url</string>
+    <string name="contact_seller">Contact Seller</string>
 </resources>

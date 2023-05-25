@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Heading"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Heading"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/cycleImageA"
+        android:layout_gravity="center"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_margin="10dp"
+        android:contentDescription="@string/app_name"
+        android:scaleType="center"
+        android:src="@drawable/baseline_pedal_bike_24" />
+    <Button
+        android:id="@+id/contactSeller"
+        android:layout_width="match_parent"
+        android:textColor="@color/black"
+        android:layout_margin="10dp"
+        android:background="@drawable/switch_trcks"
+        android:layout_height="wrap_content"
+        android:text="@string/contact_seller"/>
+
+</LinearLayout>
+

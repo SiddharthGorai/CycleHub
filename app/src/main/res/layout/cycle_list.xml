@@ -31,11 +31,16 @@
             android:textSize="15sp"
             android:padding="5dp"
             android:text="@string/description" />
+        <TextView
+            android:id="@+id/url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="@string/url" />
         <ImageView
             android:id="@+id/cycleImg"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:src="@drawable/cycle"/>
+            android:layout_gravity="center" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

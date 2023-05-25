@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/dname"
+        android:checkable="false"
+        android:icon="@drawable/baseline_account_circle_24"
+        android:visible="true"
+        android:title="@string/name"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/demail"
+        android:checkable="false"
+        android:icon="@drawable/baseline_email_24"
+        android:visible="true"
+        android:title="@string/email"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/changePass"
+        android:checkable="false"
+        android:icon="@drawable/baseline_password_24"
+        android:title="@string/change_password"
+        android:visible="true"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/signOut"
+        android:checkable="false"
+        android:icon="@drawable/baseline_logout_24"
+        android:title="@string/sign_out"
+        android:visible="true"
+        app:showAsAction="never" />
+
+
+</menu>
