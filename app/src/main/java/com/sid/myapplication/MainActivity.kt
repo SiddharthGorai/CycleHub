@@ -2,7 +2,6 @@ package com.sid.myapplication
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -13,7 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
-import androidx.core.net.toUri
+import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,7 +26,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import java.util.Objects
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,6 +37,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private lateinit var alertDialog: AlertDialog.Builder
+    private lateinit var uName: String
+    private lateinit var uEmail: String
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
@@ -54,8 +54,8 @@ class MainActivity : AppCompatActivity() {
         database = Firebase.database
         val myRef = database.reference
         myRef.child("Admins").child(userID).get().addOnSuccessListener {
-            val uName = it.child("adminName").value.toString()
-            val uEmail = it.child("adminEmail").value.toString()
+            uName = it.child("adminName").value.toString()
+            uEmail = it.child("adminEmail").value.toString()
 
             val dName = menu?.findItem(R.id.dname)
             val dEmail = menu?.findItem(R.id.demail)
@@ -112,14 +112,15 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-    @SuppressLint("MissingInflatedId")
-    fun showCycle(cycleNameA:String, cycleDescA:String, cycleUrlA:String){
+
+    private fun showCycle(cycleNameA: String, cycleDescA: String, cycleUrlA: String) {
         val inflater = layoutInflater
-        val view: View = inflater.inflate(R.layout.cycle_popup,null)
+        val view: View = inflater.inflate(R.layout.cycle_popup, null)
         view.findViewById<TextView>(R.id.heading).text = cycleNameA
         view.findViewById<TextView>(R.id.description).text = cycleDescA
         Glide.with(this@MainActivity).load(cycleUrlA)
-            .into(view.findViewById(R.id.cycleImageA)
+            .into(
+                view.findViewById(R.id.cycleImageA)
             )
 
         alertDialog = AlertDialog.Builder(this)
@@ -157,9 +158,17 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+        val headerView: View = navView.getHeaderView(0)
+        val editBtn: ImageView = headerView.findViewById(R.id.penEdit)
+
+        editBtn.setOnClickListener {
+            val intent = Intent(applicationContext, editProfile::class.java)
+            intent.putExtra("UserName",uName)
+            intent.putExtra("UserEmail",uEmail)
+            startActivity(intent)
+        }
         auth = Firebase.auth
         database = Firebase.database
-        val userID = auth.currentUser!!.uid
         val myRef = database.getReference("Data")
 
         val cycleList: ArrayList<cycleData> = ArrayList()
@@ -185,16 +194,22 @@ class MainActivity : AppCompatActivity() {
 
                     myAdapter.setOnItemClickListener(object : MyAdapter.onItemClickListener {
                         override fun onItemClick(position: Int) {
-                            val cycleNameA = recyclerView.findViewHolderForAdapterPosition(position)?.
-                            itemView?.findViewById<TextView>(R.id.cycleName)?.text.toString()
+                            val cycleNameA =
+                                recyclerView.findViewHolderForAdapterPosition(position)?.itemView?.findViewById<TextView>(
+                                    R.id.cycleName
+                                )?.text.toString()
 
-                            val cycleDescA = recyclerView.findViewHolderForAdapterPosition(position)?.
-                            itemView?.findViewById<TextView>(R.id.cycleDesc)?.text.toString()
+                            val cycleDescA =
+                                recyclerView.findViewHolderForAdapterPosition(position)?.itemView?.findViewById<TextView>(
+                                    R.id.cycleDesc
+                                )?.text.toString()
 
-                            val cycleUrlA = recyclerView.findViewHolderForAdapterPosition(position)?.
-                            itemView?.findViewById<TextView>(R.id.url)?.text.toString()
+                            val cycleUrlA =
+                                recyclerView.findViewHolderForAdapterPosition(position)?.itemView?.findViewById<TextView>(
+                                    R.id.url
+                                )?.text.toString()
 
-                            showCycle(cycleNameA,cycleDescA,cycleUrlA)
+                            showCycle(cycleNameA, cycleDescA, cycleUrlA)
                         }
                     })
 
@@ -206,6 +221,7 @@ class MainActivity : AppCompatActivity() {
                 TODO("Not yet implemented")
             }
         })
+
 
 
     }
