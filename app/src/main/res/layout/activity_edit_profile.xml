@@ -69,7 +69,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="Name"
-                android:textColor="@color/black"
                 android:textSize="18sp" />
 
         </LinearLayout>
@@ -80,6 +79,7 @@
             android:layout_height="match_parent">
 
             <Button
+                android:id="@+id/saveBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="save"

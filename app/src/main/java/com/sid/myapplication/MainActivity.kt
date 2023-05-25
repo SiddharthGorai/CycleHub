@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         database = Firebase.database
         val myRef = database.reference
         myRef.child("Admins").child(userID).get().addOnSuccessListener {
+
             uName = it.child("adminName").value.toString()
             uEmail = it.child("adminEmail").value.toString()
 
