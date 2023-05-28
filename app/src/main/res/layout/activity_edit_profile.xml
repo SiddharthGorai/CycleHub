@@ -9,7 +9,7 @@
     tools:context=".editProfile">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/userImg"
+        android:id="@+id/userImgA"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_gravity="center"
@@ -41,7 +41,7 @@
 
             <EditText
                 android:id="@+id/userName1"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@null"

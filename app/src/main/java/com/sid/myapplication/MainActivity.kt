@@ -1,6 +1,7 @@
 package com.sid.myapplication
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -26,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import de.hdodenhof.circleimageview.CircleImageView
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,20 +50,48 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun changeMenuBar(menu: Menu?) {
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val navView: NavigationView = findViewById(R.id.navView)
+        val menu: Menu = navView.menu
+        changeMenuBar(menu)
+        return super.onCreateOptionsMenu(menu)
+
+    }
+
+
+    override fun onResume() {
+        val navView: NavigationView = findViewById(R.id.navView)
+        val menu: Menu = navView.menu
+        changeMenuBar(menu)
+        super.onResume()
+
+    }
+
+
+    fun changeMenuBar(menu: Menu?) {
         val auth = Firebase.auth
         val userID = auth.currentUser!!.uid
         database = Firebase.database
         val myRef = database.reference
+
+        val inflater = layoutInflater
+        val view: View = inflater.inflate(R.layout.nav_header,null)
+
         myRef.child("Admins").child(userID).get().addOnSuccessListener {
 
             uName = it.child("adminName").value.toString()
             uEmail = it.child("adminEmail").value.toString()
+            val uPic = it.child("adminProfile").value.toString()
 
             val dName = menu?.findItem(R.id.dname)
             val dEmail = menu?.findItem(R.id.demail)
             dEmail?.title = uEmail
             dName?.title = uName
+
+            Glide.with(view).load(uPic)
+                .into(
+                    view.findViewById<CircleImageView>(R.id.userImg)
+                )
 
 
         }.addOnFailureListener {
@@ -150,7 +180,6 @@ class MainActivity : AppCompatActivity() {
 
         val navView: NavigationView = findViewById(R.id.navView)
         val menu: Menu = navView.menu
-        changeMenuBar(menu)
         navView.setNavigationItemSelectedListener { it ->
             when (it.itemId) {
                 R.id.signOut -> doThis()
@@ -164,8 +193,8 @@ class MainActivity : AppCompatActivity() {
 
         editBtn.setOnClickListener {
             val intent = Intent(applicationContext, editProfile::class.java)
-            intent.putExtra("UserName",uName)
-            intent.putExtra("UserEmail",uEmail)
+            intent.putExtra("UserName", uName)
+            intent.putExtra("UserEmail", uEmail)
             startActivity(intent)
         }
         auth = Firebase.auth
@@ -222,7 +251,6 @@ class MainActivity : AppCompatActivity() {
                 TODO("Not yet implemented")
             }
         })
-
 
 
     }
